@@ -1,0 +1,43 @@
+import java.io.*;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
+public class WordCounter {
+    public static void main(String[] args) {
+        try {
+            // URL of the raw file in GitHub (make sure you provide the raw file link here)
+            URL url = new URL("https://raw.githubusercontent.com/Brandanseemungal2/org.howard.edu.lsp.assignment2/main/paragraphhttps://raw.githubusercontent.com/Brandanseemungal2/org.howard.edu.lsp.assignment2/main/paragraph");
+
+            // Reading the file
+            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            String line;
+            Map<String, Integer> wordCounts = new HashMap<>();
+
+            // Process each line
+            while ((line = reader.readLine()) != null) {
+                // Split each line into words using non-word characters (punctuation, spaces, etc.) as delimiters
+                String[] words = line.split("\\W+");
+
+                // Iterate over words and count those with length >= 4
+                for (String word : words) {
+                    if (word.length() >= 4) {
+                        word = word.toLowerCase(); // To avoid case sensitivity
+                        wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1);
+                    }
+                }
+            }
+
+            // Close the reader
+            reader.close();
+
+            // Print the word counts
+            for (Map.Entry<String, Integer> entry : wordCounts.entrySet()) {
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+    }
+}
