@@ -3,6 +3,11 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+* Name: Brandan Seemungal
+*/
+package org.howard.edu.lsp.assignment2;
+
 public class WordCounter {
     public static void main(String[] args) {
         try {
